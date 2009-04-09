@@ -1,3 +1,4 @@
+-- Demonstrates the usage of closures in Lua
 function loop(start, stop, block)
   local i = start
   while i < stop do

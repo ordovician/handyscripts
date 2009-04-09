@@ -1,0 +1,97 @@
+#!/usr/local/bin/python
+import re, sys, getopt, string, time
+
+if len(sys.argv) < 2:
+  print "Usage: create-rms-class classname [creator]"
+  sys.exit()
+  
+class_name = sys.argv[1]
+author     = 'Erik Engheim'
+date       = time.strftime('%d.%m.%Y')
+  
+if len(sys.argv) == 3:
+  author = sys.argv[2]
+  
+header_text = """/*!
+  \\file   %(file_name)s.h
+  \\author %(author)s
+  \\date   %(date)s
+ 
+ */
+ 
+#ifndef %(guard)s_H
+#define %(guard)s_H
+ 
+//- Includes
+
+//- Forward references
+ 
+/*!
+  \\class  %(class_name)s
+  \\author %(author)s
+  \\date   %(date)s
+ 
+ 
+ */ 
+class %(class_name)s {
+public:
+  //- Constructors
+  %(class_name)s();
+  virtual ~%(class_name)s();
+  
+  //- Accessors
+
+  //- Request
+  
+  //- Operations
+private:
+    
+};
+ 
+#endif
+""" % {\
+  'file_name': class_name.lower(), \
+  'author': author,\
+  'date': date,\
+  'guard': class_name.upper(),\
+  'class_name': class_name }
+  
+implementation_text = """/*!
+  \\file   %(file_name)s.cpp
+  \\author %(author)s
+  \\date   %(date)s
+ 
+ */
+
+//- Includes
+#include <%(file_name)s.h>
+
+//- Constructors
+%(class_name)s::%(class_name)s() {
+
+}
+
+%(class_name)s::~%(class_name)s() {
+
+}
+
+//- Accessors
+
+//- Request
+
+//- Operations
+
+""" % {\
+  'file_name': class_name.lower(), \
+  'author': author,\
+  'date': date,\
+  'guard': class_name.upper(),\
+  'class_name': class_name }  
+  
+f = open(class_name.lower() + '.h', 'w')
+f.write(header_text)
+f.close()
+
+f = open(class_name.lower() + '.cpp', 'w')
+f.write(implementation_text)
+f.close()

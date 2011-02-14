@@ -1,2 +1,7 @@
 A collection of handy scripts used to assist a developer. 
 In addition we have scripts demonstrating language features and am some scripts which are experimentation code and throw away code.
+
+swing-list.clj   Example code for showing how you can make a Swing application in clojure
+
+create-rms-class Creates a c++ source code file after a template
+venn.go          Simple program written in Go for doing venn diagram operations on text files. Combine lines in two files, find shared ones or those not shared.
